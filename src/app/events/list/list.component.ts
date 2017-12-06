@@ -1,8 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
-import { EVENTS } from '../../mock-data';
 import { Event } from '../../event';
-import { ApiService } from '../../api.service'
 
 @Component({
   selector: 'app-list',
@@ -11,17 +9,11 @@ import { ApiService } from '../../api.service'
 })
 export class ListComponent implements OnInit {
 
-  events: Event[];
+  @Input() events: Event[];
 
-  constructor(
-    private api: ApiService
-  ) { }
+  constructor() { }
 
   ngOnInit() {
-    this.api.getEvents()
-      .subscribe(res => {
-        this.events = res;
-      })
-  }
 
+  }
 }
