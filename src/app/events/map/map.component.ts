@@ -14,15 +14,19 @@ export class MapComponent implements OnInit {
   private map: any;
   private markers = [];
 
-  @Input() events: Event[] = [];
+  @Input()
+  set events(events: Event[]) {
+    if (!!events) {
+      this.showMarkers(events)
+    }
+  }
 
   constructor(
     private api: ApiService
   ) { }
 
-  showMarkers() {
-    console.log(this.events)
-    this.events.forEach((event) => {
+  showMarkers(events) {
+    events.forEach((event) => {
       if (event.geometry) {
         L.marker([event.geometry.coordinates[1], event.geometry.coordinates[0]]).addTo(this.map)
           .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
@@ -37,8 +41,6 @@ export class MapComponent implements OnInit {
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
-
-    this.showMarkers()
   }
 
 }

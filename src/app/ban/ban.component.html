@@ -1,0 +1,20 @@
+<!-- <form #f="ngForm">
+  <mat-form-field>
+    <input matInput placeholder="Adresse" type="text" name="adresse" ngModel />
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="submitForm(f.value)">Go</button>
+</form> -->
+
+<mat-form-field>
+  <input type="text" matInput (keyup)="searchTerm$.next($event.target.value)" [formControl]="search" [matAutocomplete]="auto">
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="submitForm()">Go</button>
+
+<mat-autocomplete #auto="matAutocomplete">
+  <mat-option *ngFor="let option of autocomplete" [value]="option">
+    {{ option }}
+  </mat-option>
+</mat-autocomplete>
+
+
+{{results}}
